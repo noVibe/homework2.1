@@ -19,7 +19,7 @@ public class Car {
 
     Key key;
 
-    public class Key {
+    private class Key {
         final boolean isRemoteEngineStartAvailable;
         final boolean isNoKeyAccessAvailable;
 
@@ -49,7 +49,7 @@ public class Car {
         setGearBox(gearBox);
         setPlateNumber(plateNumber);
         this.isWinterTires = isWinterTires;
-        this.key = new Key(isRemoteEngineStartAvailable, isNoKeyAccessAvailable);
+        key = new Key(isRemoteEngineStartAvailable, isNoKeyAccessAvailable);
     }
 
     public double getEngineVolume() {
