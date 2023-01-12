@@ -1,4 +1,4 @@
-package Utilities;
+package utilities;
 
 public class Utilities {
     public static int a = 0;
