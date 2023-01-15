@@ -1,6 +1,8 @@
 package transport;
 
 import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static utilities.Utilities.*;
 
@@ -37,13 +39,14 @@ public class Car {
 
 
     public Car(String brand, String model, double engineVolume, String color, int year, String country,
-               String bodyStyle, int seatsAmount, String gearBox, String plateNumber, boolean isWinterTires, boolean isRemoteEngineStartAvailable, boolean isNoKeyAccessAvailable) {
-        this.brand = isNullOrEmpty(brand) ? "default" : brand;
-        this.model = isNullOrEmpty(model) || model.isEmpty() ? "default" : model;
-        this.country = isNullOrEmpty(country) || country.isBlank() ? "default" : country;
-        this.year = year > 0 ? year : 2000;
-        this.bodyStyle = isNullOrEmpty(bodyStyle) || bodyStyle.isEmpty() ? "default" : bodyStyle;
-        this.seatsAmount = seatsAmount > 0 ? seatsAmount : 4;
+               String bodyStyle, int seatsAmount, String gearBox, String plateNumber, boolean isWinterTires,
+               boolean isRemoteEngineStartAvailable, boolean isNoKeyAccessAvailable) {
+        this.brand = validationAndDefaultSet(brand, "default");
+        this.model = validationAndDefaultSet(model, "default");
+        this.country = validationAndDefaultSet(country, "default");
+        this.year = validationAndDefaultSet(year, 2000);
+        this.bodyStyle = validationAndDefaultSet(bodyStyle, "default");
+        this.seatsAmount = validationAndDefaultSet(seatsAmount, 4);
         setEngineVolume(engineVolume);
         setColor(color);
         setGearBox(gearBox);
@@ -57,7 +60,7 @@ public class Car {
     }
 
     public void setEngineVolume(double engineVolume) {
-        this.engineVolume = engineVolume > 0 ? engineVolume : 1.5;
+        this.engineVolume = validationAndDefaultSet(engineVolume, 1500);
     }
 
     public String getColor() {
@@ -65,8 +68,7 @@ public class Car {
     }
 
     public void setColor(String color) {
-        this.color = isNullOrEmpty(color) || color.isEmpty() ? "white" : color;
-        ;
+        this.color = validationAndDefaultSet(color, "white");
     }
 
     public String getGearBox() {
@@ -74,7 +76,7 @@ public class Car {
     }
 
     public void setGearBox(String gearBox) {
-        this.gearBox = isNullOrEmpty(gearBox) || gearBox.isEmpty() ? "default" : gearBox;
+        this.gearBox = validationAndDefaultSet(gearBox, "default");
     }
 
     public String getPlateNumber() {
@@ -82,8 +84,9 @@ public class Car {
     }
 
     public void setPlateNumber(String plateNumber) {
-        this.plateNumber = isNullOrEmpty(plateNumber) || plateNumber.isEmpty() ? "default" : plateNumber;
-        ;
+        if (plateNumber != null && plateNumber.matches("[авсенкмоуртх](?!000)\\d{3}[авсенкмоуртх]{2}(0[1-9]|[1-9]\\d\\d?)"))
+            this.plateNumber = plateNumber;
+        else this.plateNumber = "default";
     }
 
     public boolean isWinterTires() {
