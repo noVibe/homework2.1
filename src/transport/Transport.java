@@ -3,12 +3,12 @@ package transport;
 import static utilities.Utilities.*;
 
 public abstract class Transport {
-    final protected String brand;
-    final protected String model;
-    final protected int year;
-    final protected String country;
-    protected String color;
-    protected int maxVelocity;
+    final private String brand;
+    final private String model;
+    final private int year;
+    final private String country;
+    private String color;
+    private int maxVelocity;
 
     public Transport(String brand, String model, int year, String country, String color, int maxVelocity) {
         this.brand = validationAndDefaultSet(brand, "default");
