@@ -1,20 +1,13 @@
 package transport;
 
 import java.time.LocalDate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static utilities.Utilities.*;
 
-public class Car {
-    final private String brand;
-    final private String model;
-    final private int year;
-    final private String country;
+public class Car extends Transport {
     final private String bodyStyle;
     final private int seatsAmount;
     private double engineVolume;
-    private String color;
     private String gearBox;
     private String plateNumber;
     private boolean isWinterTires;
@@ -38,17 +31,13 @@ public class Car {
     }
 
 
-    public Car(String brand, String model, double engineVolume, String color, int year, String country,
-               String bodyStyle, int seatsAmount, String gearBox, String plateNumber, boolean isWinterTires,
+    public Car(String brand, String model, double engineVolume, String color, int year, String country, String bodyStyle,
+               int seatsAmount, String gearBox, String plateNumber, boolean isWinterTires, int maxVelocity,
                boolean isRemoteEngineStartAvailable, boolean isNoKeyAccessAvailable) {
-        this.brand = validationAndDefaultSet(brand, "default");
-        this.model = validationAndDefaultSet(model, "default");
-        this.country = validationAndDefaultSet(country, "default");
-        this.year = validationAndDefaultSet(year, 2000);
+        super(brand, model, year, country, color, maxVelocity);
         this.bodyStyle = validationAndDefaultSet(bodyStyle, "default");
         this.seatsAmount = validationAndDefaultSet(seatsAmount, 4);
         setEngineVolume(engineVolume);
-        setColor(color);
         setGearBox(gearBox);
         setPlateNumber(plateNumber);
         this.isWinterTires = isWinterTires;
@@ -60,15 +49,7 @@ public class Car {
     }
 
     public void setEngineVolume(double engineVolume) {
-        this.engineVolume = validationAndDefaultSet(engineVolume, 1500);
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = validationAndDefaultSet(color, "white");
+        this.engineVolume = validationAndDefaultSet(engineVolume, 1.5);
     }
 
     public String getGearBox() {
@@ -97,22 +78,6 @@ public class Car {
         isWinterTires = winterTires;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
     public String getBodyStyle() {
         return bodyStyle;
     }
@@ -128,14 +93,10 @@ public class Car {
 
     @Override
     public String toString() {
-        return "brand: " + brand +
-                ", model: " + model +
-                ", year: " + year +
-                ", country: " + country +
+        return "Car " + super.toString() +
                 ", bodyStyle: " + bodyStyle +
                 ", seatsAmount: " + seatsAmount +
                 ", engineVolume: " + engineVolume +
-                ", color: " + color +
                 ", gearBox: " + gearBox +
                 ", plateNumber: " + plateNumber + ", " +
                 (isWinterTires ? "Winter tires" : "Summer tires") + ", " +
