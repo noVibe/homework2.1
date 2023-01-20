@@ -1,24 +1,28 @@
-import transport.Bus;
-import transport.Car;
+import transport.cars.*;
+import transport.drivers.*;
 
 public class Main {
     public static void main(String[] args) {
+        DriverB mark = new DriverB("Mark", true, 10);
+        DriverD bob = new DriverD("Bob", true, 25);
+        DriverC bill = new DriverC("Bill", true, 8);
 
-        Car car = new Car("Audi", "A8 50 L TDI quattro", 2.5,"black",2020,
-                "Germany", "Sedan", 4, "Robot", "а222ок202", false, 170, true, false);
-        Car testCar = new Car("", null, 0, null,-1, "", null,
-                100, "", null, false, -2, false,false);
+        LightCar lancia = new LightCar("Lancia", "Delta HF Integrale", 1.995, mark);
+        Bus ikarus = new Bus("Ikarus", "55", 8.28, bob);
+        Truck kamaz = new Truck("Kamaz", "K5", 12.98, bill);
 
-        car.changeTiresForCurrentSeason();
+//        Truck test = new Truck("", null, 0, bill);
 
-        System.out.println(car);
-        System.out.println(testCar);
-
-        Bus bus = new Bus("Ferrari", "Random", 1988, "Italy", "Red", 220);
-        Bus testBus = new Bus(null, "", 0, null, "", -4);
-
-        System.out.println(bus);
-        System.out.println(testBus);
-
+        System.out.println(kamaz.toString());
+        lancia.raceMessage();
+        ikarus.move();
+        ikarus.stop();
+        kamaz.maxSpeed();
+        kamaz.pitStop();
+        kamaz.bestLap();
+        mark.driveCar();
+        lancia.getDriver().fillUp();
+        bob.stopCar();
     }
+
 }
