@@ -13,7 +13,7 @@ public class Main {
 
 //        Truck test = new Truck("", null, 0, bill);
 
-        System.out.println(kamaz.toString());
+        System.out.println(kamaz);
         lancia.raceMessage();
         ikarus.move();
         ikarus.stop();
