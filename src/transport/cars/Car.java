@@ -1,5 +1,4 @@
 package transport.cars;
-import org.w3c.dom.events.EventException;
 import transport.Competing;
 import transport.Transport;
 import transport.drivers.*;
@@ -21,6 +20,8 @@ public abstract class Car<T extends Driver> extends Transport implements Competi
         this.engineVolume = validationAndDefaultSet(engineVolume, 1.5);
         hire(driver);
     }
+
+    public abstract void printType();
 
     public void move() {
         String temp = getClass().toString().replaceAll(".+\\.", "");
@@ -82,6 +83,8 @@ public abstract class Car<T extends Driver> extends Transport implements Competi
 
     public void maxSpeed() {
     }
+
+
     //          Checking plate number via regex:
 //        [авсенкмоуртх](?!000)\\d{3}[авсенкмоуртх]{2}(0[1-9]|[1-9]\\d\\d?)
 //
