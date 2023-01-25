@@ -1,5 +1,8 @@
 import transport.cars.*;
 import transport.drivers.*;
+import transport.enums.BodyType;
+import transport.enums.LoadCapacity;
+import transport.enums.PassengerCapacity;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,17 +15,16 @@ public class Main {
         Truck kamaz = new Truck("Kamaz", "K5", 12.98, bill);
 
 //        Truck test = new Truck("", null, 0, bill);
-
+        lancia.printType();
+        System.out.println(lancia);
+        lancia.setBody(BodyType.HATCHBACK);
+        kamaz.setLoadCapacity(LoadCapacity.N3);
+        ikarus.setPassengerCapacity(PassengerCapacity.TINY);
+        lancia.printType();
+        kamaz.printType();
         System.out.println(kamaz);
-        lancia.raceMessage();
-        ikarus.move();
-        ikarus.stop();
-        kamaz.maxSpeed();
-        kamaz.pitStop();
-        kamaz.bestLap();
-        mark.driveCar();
-        lancia.getDriver().fillUp();
-        bob.stopCar();
+        ikarus.printType();
+
     }
 
 }
