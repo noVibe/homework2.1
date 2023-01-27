@@ -1,5 +1,4 @@
 package transport.cars;
-import static utilities.Utilities.*;
 import transport.drivers.DriverC;
 import transport.enums.LoadCapacity;
 
@@ -26,4 +25,5 @@ public class Truck extends Car{
     public void setLoadCapacity(LoadCapacity loadCapacity) {
         this.loadCapacity = loadCapacity;
     }
+
 }

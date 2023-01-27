@@ -2,6 +2,7 @@ package transport.cars;
 import transport.Competing;
 import transport.Transport;
 import transport.drivers.*;
+import transport.exceptions.TransportTypeException;
 
 import java.lang.reflect.InaccessibleObjectException;
 
@@ -21,6 +22,17 @@ public abstract class Car<T extends Driver> extends Transport implements Competi
         hire(driver);
     }
 
+    public void diagnose() {
+        try {
+            if (this.getClass() == Bus.class) {
+                throw new TransportTypeException("Bus diagnosing is not allowed");
+            }
+            System.out.println("Diagnosed");
+        } catch (TransportTypeException t) {
+            System.err.println(t.getMessage());
+        }
+
+    }
     public abstract void printType();
 
     public void move() {

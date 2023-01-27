@@ -2,7 +2,6 @@ package transport.cars;
 
 import transport.drivers.*;
 import transport.enums.BodyType;
-import static utilities.Utilities.*;
 public class LightCar extends Car {
     private BodyType body;
     public LightCar(String brand, String model, double engineVolume, DriverB driver) {
