@@ -1,3 +1,5 @@
+import service.ServiceStation;
+import transport.Transport;
 import transport.cars.*;
 import transport.drivers.*;
 import transport.enums.BodyType;
@@ -14,17 +16,17 @@ public class Main {
         Bus ikarus = new Bus("Ikarus", "55", 8.28, bob);
         Truck kamaz = new Truck("Kamaz", "K5", 12.98, bill);
 
-//        Truck test = new Truck("", null, 0, bill);
-        lancia.printType();
-        System.out.println(lancia);
         lancia.setBody(BodyType.HATCHBACK);
-        kamaz.setLoadCapacity(LoadCapacity.N3);
         ikarus.setPassengerCapacity(PassengerCapacity.TINY);
-        lancia.printType();
-        kamaz.printType();
-        System.out.println(kamaz);
-        ikarus.printType();
+        kamaz.setLoadCapacity(LoadCapacity.N2);
 
+        Transport.addMechanic("Tim", "Apple");
+
+        ServiceStation.addCar(lancia);
+        ServiceStation.addCar(lancia);
+        ServiceStation.addCar(kamaz);
+        ServiceStation.addCar(ikarus);
+        ServiceStation.doService();
+        ServiceStation.printCarsOnService();
     }
-
 }

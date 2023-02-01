@@ -11,7 +11,6 @@ public abstract class Car<T extends Driver> extends Transport implements Competi
     final private String brand;
     final private String model;
     final private double engineVolume;
-
     private T driver;
 
     public Car(String brand, String model, double engineVolume, T driver) {
@@ -20,6 +19,20 @@ public abstract class Car<T extends Driver> extends Transport implements Competi
         this.engineVolume = validationAndDefaultSet(engineVolume, 1.5);
         hire(driver);
     }
+
+    public abstract boolean checkIfServiceable();
+
+    public void printDriverName() {
+        System.out.println(this.driver.getName());
+    }
+
+    public void printMechanicsList() {
+        System.out.println(Transport.listOfMechanics);
+    }
+
+
+    public abstract void diagnose();
+
 
     public abstract void printType();
 

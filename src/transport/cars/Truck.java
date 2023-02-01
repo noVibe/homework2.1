@@ -1,5 +1,4 @@
 package transport.cars;
-import static utilities.Utilities.*;
 import transport.drivers.DriverC;
 import transport.enums.LoadCapacity;
 
@@ -7,6 +6,16 @@ public class Truck extends Car{
     private LoadCapacity loadCapacity;
     public Truck(String brand, String model, double engineVolume, DriverC driver) {
         super(brand, model, engineVolume, driver);
+    }
+
+    @Override
+    public boolean checkIfServiceable() {
+        return true;
+    }
+
+    @Override
+    public void diagnose() {
+        System.out.println("Diagnosed");
     }
 
     @Override
@@ -26,4 +35,5 @@ public class Truck extends Car{
     public void setLoadCapacity(LoadCapacity loadCapacity) {
         this.loadCapacity = loadCapacity;
     }
+
 }
