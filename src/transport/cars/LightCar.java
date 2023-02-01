@@ -9,6 +9,16 @@ public class LightCar extends Car {
     }
 
     @Override
+    public boolean checkIfServiceable() {
+        return true;
+    }
+
+    @Override
+    public void diagnose() {
+        System.out.println("Diagnosed");
+    }
+
+    @Override
     public String toString() {
         return super.toString() + (body == null ? ". Body type: No data" : ". " + body);
     }

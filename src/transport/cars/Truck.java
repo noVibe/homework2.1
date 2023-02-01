@@ -9,6 +9,16 @@ public class Truck extends Car{
     }
 
     @Override
+    public boolean checkIfServiceable() {
+        return true;
+    }
+
+    @Override
+    public void diagnose() {
+        System.out.println("Diagnosed");
+    }
+
+    @Override
     public String toString() {
         return super.toString() + (loadCapacity == null ? ". Load capacity: No data" : ". " + loadCapacity);
     }
