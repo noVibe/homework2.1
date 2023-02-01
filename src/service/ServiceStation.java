@@ -8,7 +8,7 @@ import java.util.Queue;
 public abstract class ServiceStation {
     private static Queue<Car> carsService = new LinkedList<>();
 
-    public static <C extends Car> void addCar(C car) {
+    public static void addCar(Car car) {
         System.out.print(car.getBrand() + " " + car.getModel());
         if (!car.checkIfServiceable())
             System.out.println(" can't be added to the service station");

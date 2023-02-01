@@ -18,7 +18,7 @@ public class Mechanic {
     }
 
     public void setName(String name) {
-        this.name = validationAndDefaultSet(name, "default");
+        this.name = validationAndDefaultSet(name, "Default Guy");
     }
 
     public String getCompany() {
@@ -26,7 +26,7 @@ public class Mechanic {
     }
 
     public void setCompany(String company) {
-        this.company = validationAndDefaultSet(company, "default");
+        this.company = validationAndDefaultSet(company, "Default Co");
     }
 
     public void doMaintenance() {

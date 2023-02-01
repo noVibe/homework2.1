@@ -15,19 +15,13 @@ public abstract class Transport {
     }
 
     public void addMechanic(String name, String company) {
-        name = validationAndDefaultSet(name, "Default Guy");
-        company = validationAndDefaultSet(company, "Default Co");
         if (listOfMechanics.contains(new Mechanic(name, company))) System.out.println("Can't duplicate mechanics");
         else listOfMechanics.add(new Mechanic(name, company));
     }
 
     public void addMechanic(Mechanic mechanic) {
         if (listOfMechanics.contains(mechanic)) System.err.println("Can't duplicate mechanics");
-        else {
-            mechanic.setName(validationAndDefaultSet(mechanic.getName(), "Default Guy"));
-            mechanic.setCompany(validationAndDefaultSet(mechanic.getCompany(), "Default Co"));
-            listOfMechanics.add(mechanic);
-        }
+        else listOfMechanics.add(mechanic);
     }
 
     public void removeMechanic(String name, String company) {
