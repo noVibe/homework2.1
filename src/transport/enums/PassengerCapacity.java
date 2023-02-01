@@ -20,4 +20,4 @@ public enum PassengerCapacity {
                 (minPassengerCapacity != null ? "from " + minPassengerCapacity : "up") +
                 (maxPassengerCapacity != null ? " to " + maxPassengerCapacity : " and higher");
     }
-}
+    }
