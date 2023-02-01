@@ -1,8 +1,5 @@
 package utilities;
 
-import transport.Competing;
-import transport.enums.LoadCapacity;
-
 public class Utilities {
     public static String validationAndDefaultSet(String input, String defaultValue) {
         return input == null || input.isBlank() ? defaultValue : input;

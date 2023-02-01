@@ -8,7 +8,7 @@ import java.util.Queue;
 public abstract class ServiceStation {
     private static Queue<Car> carsService = new LinkedList<>();
 
-    public static void addCar(Car car) {
+    public static <C extends Car> void addCar(C car) {
         System.out.print(car.getBrand() + " " + car.getModel());
         if (!car.checkIfServiceable())
             System.out.println(" can't be added to the service station");
@@ -21,12 +21,17 @@ public abstract class ServiceStation {
     }
 
     public static void doService() {
-        if (carsService.isEmpty()) System.out.println("No cars in the service station");
-         else System.out.printf("Service for %s %s has been finished\n", carsService.peek().getBrand(), carsService.poll().getModel());
+        if (carsService.isEmpty()) System.err.println("No cars in the service station");
+        else
+            System.out.printf("Service for %s %s has been finished\n", carsService.peek().getBrand(), carsService.poll().getModel());
     }
 
     public static void printCarsOnService() {
         System.out.println(carsService.isEmpty() ? "No cars in the service station" : carsService);
+    }
+
+    public static void printAmountOfCarsInService() {
+        System.out.println(carsService.size());
     }
 
 }

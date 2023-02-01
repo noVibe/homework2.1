@@ -2,30 +2,68 @@ package transport;
 
 import mechanics.Mechanic;
 
-import java.util.ArrayList;
+import static utilities.Utilities.*;
+
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Transport {
-    protected static List<Mechanic> listOfMechanics = new ArrayList<>();
+    private List<Mechanic> listOfMechanics;
 
-    public static void addMechanic(String name, String company) {
-        listOfMechanics.add(new Mechanic(name, company));
+    public Transport(List<Mechanic> listOfMechanics) {
+        this.listOfMechanics = listOfMechanics;
     }
 
-    public static void removeMechanic(String name, String company) {
+    public void addMechanic(String name, String company) {
+        name = validationAndDefaultSet(name, "Default Guy");
+        company = validationAndDefaultSet(company, "Default Co");
+        if (listOfMechanics.contains(new Mechanic(name, company))) System.out.println("Can't duplicate mechanics");
+        else listOfMechanics.add(new Mechanic(name, company));
+    }
+
+    public void addMechanic(Mechanic mechanic) {
+        if (listOfMechanics.contains(mechanic)) System.err.println("Can't duplicate mechanics");
+        else {
+            mechanic.setName(validationAndDefaultSet(mechanic.getName(), "Default Guy"));
+            mechanic.setCompany(validationAndDefaultSet(mechanic.getCompany(), "Default Co"));
+            listOfMechanics.add(mechanic);
+        }
+    }
+
+    public void removeMechanic(String name, String company) {
         listOfMechanics.remove(new Mechanic(name, company));
     }
 
-    public static void removeMechanic(Mechanic mechanic) {
+    public void removeMechanic(Mechanic mechanic) {
         listOfMechanics.remove(mechanic);
     }
 
-    public static void removeMechanic(int index) {
+    public void removeMechanic(int index) {
         listOfMechanics.remove(index);
     }
 
-    public static void printListOfMechanics() {
-        System.out.println(listOfMechanics);
+    public void printListOfMechanics() {
+        for (Mechanic mechanic : listOfMechanics) {
+            System.out.printf("name: %s, company: %s; ", mechanic.getName(), mechanic.getCompany());
+        }
+        System.out.println();
+    }
+
+    public List<Mechanic> getListOfMechanics() {
+        return listOfMechanics;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Transport)) return false;
+        Transport transport = (Transport) o;
+        return listOfMechanics.equals(transport.listOfMechanics);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(listOfMechanics);
     }
 }
 
