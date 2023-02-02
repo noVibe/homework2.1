@@ -1,6 +1,6 @@
 package utilities;
 
-import transport.Competing;
+import transport.enums.BodyType;
 import transport.enums.LoadCapacity;
 
 public class Utilities {
