@@ -6,8 +6,8 @@ import transport.enums.BodyType;
 
 import java.util.List;
 
-public class LightCar extends Car {
-    public LightCar(String brand, String model, double engineVolume, DriverB driver, BodyType body, List<Mechanic> mechanics) {
+public class LightWheelTransport extends WheelTransport {
+    public LightWheelTransport(String brand, String model, double engineVolume, DriverB driver, BodyType body, List<Mechanic> mechanics) {
         super(brand, model, engineVolume, driver, body, mechanics);
     }
 

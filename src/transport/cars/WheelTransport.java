@@ -10,14 +10,14 @@ import java.util.Objects;
 
 import static utilities.Utilities.*;
 
-public abstract class Car<T extends Driver, E extends Enum> extends Transport implements Competing {
+public abstract class WheelTransport<T extends Driver, E extends Enum> extends Transport implements Competing {
     final private String brand;
     final private String model;
     final private double engineVolume;
     private T driver;
     private E type;
 
-    public Car(String brand, String model, double engineVolume, T driver, E type, List<Mechanic> mechanics) {
+    public WheelTransport(String brand, String model, double engineVolume, T driver, E type, List<Mechanic> mechanics) {
         super(mechanics);
         this.brand = validationAndDefaultSet(brand, "default");
         this.model = validationAndDefaultSet(model, "default");
@@ -115,10 +115,10 @@ public abstract class Car<T extends Driver, E extends Enum> extends Transport im
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Car)) return false;
+        if (!(o instanceof WheelTransport)) return false;
         if (!super.equals(o)) return false;
-        Car<?, ?> car = (Car<?, ?>) o;
-        return Double.compare(car.engineVolume, engineVolume) == 0 && Objects.equals(brand, car.brand) && Objects.equals(model, car.model) && Objects.equals(driver, car.driver) && Objects.equals(type, car.type);
+        WheelTransport<?, ?> wheelTransport = (WheelTransport<?, ?>) o;
+        return Double.compare(wheelTransport.engineVolume, engineVolume) == 0 && Objects.equals(brand, wheelTransport.brand) && Objects.equals(model, wheelTransport.model) && Objects.equals(driver, wheelTransport.driver) && Objects.equals(type, wheelTransport.type);
     }
 
     @Override

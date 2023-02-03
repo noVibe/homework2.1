@@ -5,7 +5,7 @@ import transport.enums.LoadCapacity;
 
 import java.util.List;
 
-public class Truck extends Car{
+public class Truck extends WheelTransport {
     public Truck(String brand, String model, double engineVolume, DriverC driver, LoadCapacity capacity, List<Mechanic> mechanics) {
         super(brand, model, engineVolume, driver, capacity, mechanics);
     }

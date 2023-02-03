@@ -22,14 +22,19 @@ public class Main {
         dan.doMaintenance();
         dan.repairCar();
 
-        Car lancia = new LightCar("Lancia", "Delta HF Integrale", 1.995, mark, BodyType.HATCHBACK, mechanics);
-        Car ikarus = new Bus("Ikarus", "55", 8.28, bob, PassengerCapacity.TINY, mechanics);
-        Car kamaz = new Truck("Kamaz", "K5", 12.98, bill, LoadCapacity.N2, mechanics);
+        WheelTransport lancia = new LightWheelTransport("Lancia", "Delta HF Integrale", 1.995, mark, BodyType.HATCHBACK, mechanics);
+        WheelTransport ikarus = new Bus("Ikarus", "55", 8.28, bob, PassengerCapacity.TINY, mechanics);
+        WheelTransport kamaz = new Truck("Kamaz", "K5", 12.98, bill, LoadCapacity.N2, mechanics);
 
-        ArrayList<Car> cars = new ArrayList<>();
-        cars.add(lancia);
-        cars.add(ikarus);
-        cars.add(kamaz);
+        ArrayList<? extends WheelTransport> wheelTransports = new ArrayList<>(){{
+            add(new Bus("Mercedes","A300",9.00, new DriverD("Frank", true, 7), PassengerCapacity.BIG, mechanics));
+        }};
+
+        wheelTransports.get(3).getDriver();
+
+        wheelTransports.add(lancia);
+        wheelTransports.add(ikarus);
+        wheelTransports.add(kamaz);
 
         lancia.printListOfMechanics();
         System.out.println(lancia.getDriver().getName());

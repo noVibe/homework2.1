@@ -6,7 +6,7 @@ import transport.exceptions.TransportTypeException;
 
 import java.util.List;
 
-public class Bus extends Car{
+public class Bus extends WheelTransport {
     public Bus(String brand, String model, double engineVolume, DriverD driver, PassengerCapacity passengerCapacity, List<Mechanic> mechanics) {
         super(brand, model, engineVolume, driver, passengerCapacity, mechanics);
     }
