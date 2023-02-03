@@ -1,27 +1,48 @@
 package transport.cars;
+import mechanics.Mechanic;
 import transport.Competing;
 import transport.Transport;
 import transport.drivers.*;
 
 import java.lang.reflect.InaccessibleObjectException;
+import java.util.List;
+import java.util.Objects;
 
 import static utilities.Utilities.*;
 
-public abstract class Car<T extends Driver> extends Transport implements Competing {
+public abstract class Car<T extends Driver, E extends Enum> extends Transport implements Competing {
     final private String brand;
     final private String model;
     final private double engineVolume;
-
     private T driver;
+    private E type;
 
-    public Car(String brand, String model, double engineVolume, T driver) {
+    public Car(String brand, String model, double engineVolume, T driver, E type, List<Mechanic> mechanics) {
+        super(mechanics);
         this.brand = validationAndDefaultSet(brand, "default");
         this.model = validationAndDefaultSet(model, "default");
         this.engineVolume = validationAndDefaultSet(engineVolume, 1.5);
+        this.type = type;
         hire(driver);
     }
 
-    public abstract void printType();
+    public abstract boolean checkIfServiceable();
+
+    public void printDriverName() {
+        System.out.println(this.driver.getName());
+    }
+
+    public abstract void diagnose();
+
+    @Override
+    public void printListOfMechanics() {
+        System.out.printf("Mechanics of %s %s: ", getBrand(), getModel());
+        super.printListOfMechanics();
+    }
+
+    public void printType() {
+        System.out.println(type != null ? type : "No type data");
+    }
 
     public void move() {
         String temp = getClass().toString().replaceAll(".+\\.", "");
@@ -32,6 +53,7 @@ public abstract class Car<T extends Driver> extends Transport implements Competi
         String temp = getClass().toString().replaceAll(".+\\.", "");
         System.out.println(temp +  " stopped");
     }
+
 
     private void hire(T driver) {
         if (driver.isHired())
@@ -46,9 +68,15 @@ public abstract class Car<T extends Driver> extends Transport implements Competi
         System.out.printf("Driver %s on the car %s %s is going to participate the race", getDriver().getName(), brand, model);
     }
 
+
     @Override
     public String toString() {
-        return "Car " + "brand: " + brand + ", model: " + model + ", engineVolume: " + engineVolume +". " + driver;
+        return "Car " + "brand: " + brand + ", model: " + model  + ", " +
+                (type != null ? type : "No type data") + ", engineVolume: " + engineVolume + ". " + driver + ". ";
+    }
+
+    public E getType() {
+        return type;
     }
 
     public String getBrand() {
@@ -84,8 +112,20 @@ public abstract class Car<T extends Driver> extends Transport implements Competi
     public void maxSpeed() {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Car)) return false;
+        if (!super.equals(o)) return false;
+        Car<?, ?> car = (Car<?, ?>) o;
+        return Double.compare(car.engineVolume, engineVolume) == 0 && Objects.equals(brand, car.brand) && Objects.equals(model, car.model) && Objects.equals(driver, car.driver) && Objects.equals(type, car.type);
+    }
 
-    //          Checking plate number via regex:
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), brand, model, engineVolume, driver, type);
+    }
+//          Checking plate number via regex:
 //        [авсенкмоуртх](?!000)\\d{3}[авсенкмоуртх]{2}(0[1-9]|[1-9]\\d\\d?)
 //
 }

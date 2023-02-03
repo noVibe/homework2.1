@@ -1,29 +1,24 @@
 package transport.cars;
 
+import mechanics.Mechanic;
 import transport.drivers.*;
 import transport.enums.BodyType;
-import static utilities.Utilities.*;
+
+import java.util.List;
+
 public class LightCar extends Car {
-    private BodyType body;
-    public LightCar(String brand, String model, double engineVolume, DriverB driver) {
-        super(brand, model, engineVolume, driver);
+    public LightCar(String brand, String model, double engineVolume, DriverB driver, BodyType body, List<Mechanic> mechanics) {
+        super(brand, model, engineVolume, driver, body, mechanics);
     }
 
     @Override
-    public String toString() {
-        return super.toString() + (body == null ? ". Body type: No data" : ". " + body);
+    public boolean checkIfServiceable() {
+        return true;
     }
 
     @Override
-    public void printType() {
-        System.out.println(body == null ? "Passenger type: No data" : body);
-    }
+    public void diagnose() {
+        System.out.println("Diagnosed");
 
-    public BodyType getBody() {
-        return body;
-    }
-
-    public void setBody(BodyType body) {
-        this.body = body;
     }
 }

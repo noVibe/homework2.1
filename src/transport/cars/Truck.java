@@ -1,29 +1,24 @@
 package transport.cars;
-import static utilities.Utilities.*;
+import mechanics.Mechanic;
 import transport.drivers.DriverC;
 import transport.enums.LoadCapacity;
 
+import java.util.List;
+
 public class Truck extends Car{
-    private LoadCapacity loadCapacity;
-    public Truck(String brand, String model, double engineVolume, DriverC driver) {
-        super(brand, model, engineVolume, driver);
+    public Truck(String brand, String model, double engineVolume, DriverC driver, LoadCapacity capacity, List<Mechanic> mechanics) {
+        super(brand, model, engineVolume, driver, capacity, mechanics);
     }
 
     @Override
-    public String toString() {
-        return super.toString() + (loadCapacity == null ? ". Load capacity: No data" : ". " + loadCapacity);
+    public boolean checkIfServiceable() {
+        return true;
     }
 
     @Override
-    public void printType() {
-        System.out.println(loadCapacity == null ? "Load capacity: No data" : loadCapacity);
+    public void diagnose() {
+        System.out.println("Diagnosed");
     }
 
-    public LoadCapacity getLoadCapacity() {
-        return loadCapacity;
-    }
 
-    public void setLoadCapacity(LoadCapacity loadCapacity) {
-        this.loadCapacity = loadCapacity;
-    }
 }
