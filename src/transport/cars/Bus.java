@@ -1,8 +1,9 @@
 package transport.cars;
+import excepptions.TransportTypeException;
 import mechanics.Mechanic;
 import transport.drivers.DriverD;
 import transport.enums.PassengerCapacity;
-import transport.exceptions.TransportTypeException;
+
 
 import java.util.List;
 
