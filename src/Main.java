@@ -25,6 +25,8 @@ public class Main {
         WheelTransport ikarus = new Bus("Ikarus", "55", 8.28, bob, PassengerCapacity.TINY, mechanics);
         WheelTransport kamaz = new Truck("Kamaz", "K5", 12.98, bill, LoadCapacity.N2, mechanics);
 
+        lancia.getListOfMechanics().add(new Mechanic("Rob", "Fixi"));
+
         Map<WheelTransport, List<Mechanic>> carsAndMechanics = new HashMap<>();
         carsAndMechanics.put(lancia, lancia.getListOfMechanics());
         carsAndMechanics.put(ikarus, ikarus.getListOfMechanics());
@@ -46,9 +48,9 @@ public class Main {
             add(new Bus("Mercedes", "A300", 9.00, new DriverD("Frank", true, 7), PassengerCapacity.BIG, mechanics));
         }};
 
-//        wheelTransports.add(lancia);
-//        wheelTransports.add(ikarus);
-//        wheelTransports.add(kamaz);
+        wheelTransports.add(lancia);
+        wheelTransports.add(ikarus);
+        wheelTransports.add(kamaz);
 
     }
 }

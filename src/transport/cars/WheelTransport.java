@@ -15,7 +15,7 @@ public abstract class WheelTransport<T extends Driver, E extends Enum> extends T
     final private String model;
     final private double engineVolume;
     private T driver;
-    private E type;
+    final private E type;
 
     public WheelTransport(String brand, String model, double engineVolume, T driver, E type, List<Mechanic> mechanics) {
         super(mechanics);
@@ -117,15 +117,16 @@ public abstract class WheelTransport<T extends Driver, E extends Enum> extends T
         if (this == o) return true;
         if (!(o instanceof WheelTransport)) return false;
         if (!super.equals(o)) return false;
-        WheelTransport<?, ?> wheelTransport = (WheelTransport<?, ?>) o;
-        return Double.compare(wheelTransport.engineVolume, engineVolume) == 0 && Objects.equals(brand, wheelTransport.brand) && Objects.equals(model, wheelTransport.model) && Objects.equals(driver, wheelTransport.driver) && Objects.equals(type, wheelTransport.type);
+        WheelTransport<?, ?> that = (WheelTransport<?, ?>) o;
+        return Double.compare(that.engineVolume, engineVolume) == 0 && Objects.equals(brand, that.brand) && Objects.equals(model, that.model) && Objects.equals(driver, that.driver) && Objects.equals(type, that.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), brand, model, engineVolume, driver, type);
+        return Objects.hash(brand, model, engineVolume, type);
     }
-//          Checking plate number via regex:
+
+    //          Checking plate number via regex:
 //        [авсенкмоуртх](?!000)\\d{3}[авсенкмоуртх]{2}(0[1-9]|[1-9]\\d\\d?)
 //
 }

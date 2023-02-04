@@ -2,16 +2,19 @@ package transport;
 
 import mechanics.Mechanic;
 
-import static utilities.Utilities.*;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public abstract class Transport {
-    private List<Mechanic> listOfMechanics;
+    final private List<Mechanic> listOfMechanics;
 
     public Transport(List<Mechanic> listOfMechanics) {
-        this.listOfMechanics = listOfMechanics;
+        this.listOfMechanics = new ArrayList<>(listOfMechanics);
+    }
+
+    public void addListOfMechanics(List<Mechanic> list) {
+        this.listOfMechanics.addAll(list);
     }
 
     public void addMechanic(String name, String company) {
