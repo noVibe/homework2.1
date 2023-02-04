@@ -1,7 +1,7 @@
 package transport.drivers;
 import static utilities.Utilities.*;
 
-public abstract class Driver<T> {
+public abstract class Driver {
     final private String name;
     private boolean isDriverLicence;
     private int experienceYears;

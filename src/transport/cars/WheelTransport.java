@@ -10,19 +10,17 @@ import java.util.Objects;
 
 import static utilities.Utilities.*;
 
-public abstract class WheelTransport<T extends Driver, E extends Enum> extends Transport implements Competing {
+public abstract class WheelTransport<T extends Driver> extends Transport implements Competing {
     final private String brand;
     final private String model;
     final private double engineVolume;
     private T driver;
-    final private E type;
 
-    public WheelTransport(String brand, String model, double engineVolume, T driver, E type, List<Mechanic> mechanics) {
+    public WheelTransport(String brand, String model, double engineVolume, T driver, List<Mechanic> mechanics) {
         super(mechanics);
         this.brand = validationAndDefaultSet(brand, "default");
         this.model = validationAndDefaultSet(model, "default");
         this.engineVolume = validationAndDefaultSet(engineVolume, 1.5);
-        this.type = type;
         hire(driver);
     }
 
@@ -40,9 +38,7 @@ public abstract class WheelTransport<T extends Driver, E extends Enum> extends T
         super.printListOfMechanics();
     }
 
-    public void printType() {
-        System.out.println(type != null ? type : "No type data");
-    }
+    public abstract void printType();
 
     public void move() {
         String temp = getClass().toString().replaceAll(".+\\.", "");
@@ -72,12 +68,11 @@ public abstract class WheelTransport<T extends Driver, E extends Enum> extends T
     @Override
     public String toString() {
         return "Car " + "brand: " + brand + ", model: " + model  + ", " +
-                (type != null ? type : "No type data") + ", engineVolume: " + engineVolume + ". " + driver + ". ";
+                ", engineVolume: " + engineVolume + ". " + driver + ". ";
     }
 
-    public E getType() {
-        return type;
-    }
+    public abstract Enum getType();
+
 
     public String getBrand() {
         return brand;
@@ -117,13 +112,13 @@ public abstract class WheelTransport<T extends Driver, E extends Enum> extends T
         if (this == o) return true;
         if (!(o instanceof WheelTransport)) return false;
         if (!super.equals(o)) return false;
-        WheelTransport<?, ?> that = (WheelTransport<?, ?>) o;
-        return Double.compare(that.engineVolume, engineVolume) == 0 && Objects.equals(brand, that.brand) && Objects.equals(model, that.model) && Objects.equals(driver, that.driver) && Objects.equals(type, that.type);
+        WheelTransport<?> that = (WheelTransport<?>) o;
+        return Double.compare(that.engineVolume, engineVolume) == 0 && Objects.equals(brand, that.brand) && Objects.equals(model, that.model) && Objects.equals(driver, that.driver);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(brand, model, engineVolume, type);
+        return Objects.hash(super.hashCode(), brand, model, engineVolume);
     }
 
     //          Checking plate number via regex:
