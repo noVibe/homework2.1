@@ -1,12 +1,11 @@
 import mechanics.Mechanic;
-import service.ServiceStation;
 import transport.cars.*;
 import transport.drivers.*;
 import transport.enums.BodyType;
 import transport.enums.LoadCapacity;
 import transport.enums.PassengerCapacity;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,31 +18,33 @@ public class Main {
         List<Mechanic> mechanics = new ArrayList<>();
         mechanics.add(dan);
         mechanics.add(new Mechanic("Bob", "Gop"));
-        dan.doMaintenance();
-        dan.repairCar();
 
-        WheelTransport lancia = new LightWheelTransport("Lancia", "Delta HF Integrale", 1.995, mark, BodyType.HATCHBACK, mechanics);
-        WheelTransport ikarus = new Bus("Ikarus", "55", 8.28, bob, PassengerCapacity.TINY, mechanics);
-        WheelTransport kamaz = new Truck("Kamaz", "K5", 12.98, bill, LoadCapacity.N2, mechanics);
 
-        ArrayList<? extends WheelTransport> wheelTransports = new ArrayList<>(){{
-            add(new Bus("Mercedes","A300",9.00, new DriverD("Frank", true, 7), PassengerCapacity.BIG, mechanics));
+        WheelTransport<DriverB> lancia = new LightWheelTransport("Lancia", "Delta HF Integrale", 1.995, mark, BodyType.HATCHBACK, mechanics);
+        WheelTransport<DriverD> ikarus = new Bus("Ikarus", "55", 8.28, bob, PassengerCapacity.TINY, mechanics);
+        WheelTransport<DriverC> kamaz = new Truck("Kamaz", "K5", 12.98, bill, LoadCapacity.N2, mechanics);
+
+        lancia.getListOfMechanics().add(new Mechanic("Rob", "Fixi"));
+
+        Map<WheelTransport<? extends Driver>, List<Mechanic>> carsAndMechanics = new HashMap<>();
+        carsAndMechanics.put(lancia, lancia.getListOfMechanics());
+        carsAndMechanics.put(ikarus, ikarus.getListOfMechanics());
+        carsAndMechanics.put(kamaz, kamaz.getListOfMechanics());
+
+        carsAndMechanics.forEach((k, v) -> System.out.printf("%s %s mechanics list:\n%s\n", k.getBrand(), k.getModel(), v));
+
+        /// PROBLEM ///
+//                Iterator iterator = carsAndMechanics.entrySet().iterator();
+//        while (iterator.hasNext())
+//            Map.Entry<WheelTransport, List<Mechanic>> entry = iterator.next();
+        /// PROVIDED TYPE: OBJECT ///
+
+        ArrayList<WheelTransport<? extends Driver>> wheelTransports = new ArrayList<>() {{
+            add(new Bus("Mercedes", "A300", 9.00, new DriverD("Frank", true, 7), PassengerCapacity.BIG, mechanics));
         }};
-
-        wheelTransports.get(3).getDriver();
-
         wheelTransports.add(lancia);
         wheelTransports.add(ikarus);
         wheelTransports.add(kamaz);
-
-        lancia.printListOfMechanics();
-        System.out.println(lancia.getDriver().getName());
-
-        ServiceStation.addCar(lancia);
-        ServiceStation.addCar(kamaz);
-        ServiceStation.printCarsOnService();
-        ServiceStation.addCar(ikarus);
-        ServiceStation.doService();
-        ServiceStation.printCarsOnService();
+        System.out.println(wheelTransports);
     }
 }
