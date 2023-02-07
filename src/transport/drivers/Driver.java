@@ -1,4 +1,6 @@
 package transport.drivers;
+import java.util.Objects;
+
 import static utilities.Utilities.*;
 
 public abstract class Driver {
@@ -56,5 +58,18 @@ public abstract class Driver {
 
     public void SetIsHired() {
         isHired = !isHired;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Driver)) return false;
+        Driver driver = (Driver) o;
+        return isDriverLicence == driver.isDriverLicence && experienceYears == driver.experienceYears && isHired == driver.isHired && Objects.equals(name, driver.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

@@ -13,6 +13,14 @@ public class Main {
         DriverD bob = new DriverD("Bob", true, 25);
         DriverC bill = new DriverC("Bill", true, 8);
 
+        Set<Driver> driverSet = new HashSet<>();
+        driverSet.add(mark);
+        driverSet.add(bill);
+        driverSet.add(bob);
+        Iterator pederator = driverSet.iterator();
+        while (pederator.hasNext()) System.out.println(pederator.next());
+
+
         Mechanic dan = new Mechanic("Dan", "Servicemen");
 
         List<Mechanic> mechanics = new ArrayList<>();
